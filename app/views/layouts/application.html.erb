@@ -3,12 +3,14 @@
   <head>
     <title>Todo App</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
   </head>
   <body>
     <header>
       <h1>Todo Application</h1>
-      <p>Visit count: <%= @visit_count %></p>
+      <p><%= time_based_greeting %></p>
+      <p>Total visits: <%= session[:visit_count] %></p>
+      <p>Page visits: <%= session[:page_visits]["#{controller_name}##{action_name}"] || 0 %></p>
     </header>
 
     <main>
@@ -16,7 +18,7 @@
     </main>
 
     <footer>
-      <p>Last visited: <%= session[:last_visited] %></p>
+      <p>Last visited: <%= time_ago(session[:last_visited]) %></p>
     </footer>
   </body>
 </html>
